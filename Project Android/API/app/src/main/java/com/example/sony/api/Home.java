@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +25,8 @@ public class Home extends AppCompatActivity {
     private TextView tvJob;
     private TextView tvYear;
     private Button btnUp;
+    private Button btnChat;
+    public static String name;
    public static String kt=""; //kiem tra xem co info chua
 
     @Override
@@ -37,10 +38,20 @@ public class Home extends AppCompatActivity {
         tvJob = (TextView) findViewById(R.id.tvJob);
         tvYear = (TextView) findViewById(R.id.tvYear);
         btnUp = (Button) findViewById(R.id.btnEdt);
+        btnChat= (Button) findViewById(R.id.btnChat);
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentChat = new Intent(Home.this, ChatActivity.class);
+                startActivity(intentChat);
+            }
+        });
 
 
         Intent intent = getIntent();
         final String stringValue = intent.getStringExtra("username");
+        Home.name=stringValue;
 
 
         new Home.GetInfo().execute("http://192.168.1.127/alumniserver/api/alumni?nameinfo=" + stringValue);
