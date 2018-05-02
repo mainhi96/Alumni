@@ -28,6 +28,7 @@ public class Home extends AppCompatActivity {
     private Button btnChat;
     public static String name;
    public static String kt=""; //kiem tra xem co info chua
+    private Button btnFind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,16 @@ public class Home extends AppCompatActivity {
         tvYear = (TextView) findViewById(R.id.tvYear);
         btnUp = (Button) findViewById(R.id.btnEdt);
         btnChat= (Button) findViewById(R.id.btnChat);
+        btnFind=(Button) findViewById(R.id.btnFind);
+
+        btnFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentFind = new Intent(Home.this, FindUser.class);
+                startActivity(intentFind);
+            }
+        });
+
 
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +63,7 @@ public class Home extends AppCompatActivity {
         Intent intent = getIntent();
         final String stringValue = intent.getStringExtra("username");
         Home.name=stringValue;
+
 
 
         new Home.GetInfo().execute("http://192.168.1.127/alumniserver/api/alumni?nameinfo=" + stringValue);

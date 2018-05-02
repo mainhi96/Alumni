@@ -52,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
 
                                              String   name= username.getText().toString();
-
+                                               String pass= passwords.getText().toString();
+                                               if(name.length()>0&&pass.length()>0)
                                                new DangNhap().execute("http://192.168.1.127/alumniserver/api/alumni?nameacc="+name);
-                                               //   http://hmkcode.appspot.com/rest/controller/get.json
+                                               else tvJson.setText("Mời nhập đủ thông tin");
                                            }
 
 
@@ -169,8 +170,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-            else Toast.makeText(MainActivity.this,"Mật khẩu không chính xác hoặc tài khoản không tồn tại",Toast.LENGTH_LONG);
-        }
+            else {
+                tvJson.setText("Mật khẩu không chính xác hoặc tài khoản không tồn tại");
+                Toast.makeText(MainActivity.this, "Mật khẩu không chính xác hoặc tài khoản không tồn tại", Toast.LENGTH_LONG);
+
+            }
+            }
     }
 
 
